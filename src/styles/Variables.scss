@@ -1,0 +1,77 @@
+/*
+    VARIABLES: settings, mixins and variables
+*/
+
+//fonts
+@mixin font-poke {
+    font-family: "Nova Square", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+$font-main: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    //fixed dimensions
+$header-height: 10.25rem;
+    //z-index layers
+$bottom-layer-index: -1;
+
+//colors
+$white: hsl(0, 0%, 95%);
+$black: hsl(0, 0%, 11%);
+$action-main: hsl(52, 77%, 63%);
+$action-secondary: hsl(25 93% 10%);
+$shadow-unactive-clear: hsl(0deg 0% 17.47%);
+$shadow-unactive-dark: hsl(0deg 0% 0.15%);
+$shadow-active-clear: hsl(48, 92%, 62%);
+$shadow-active-dark: hsl(0deg 0.53% 6.41%);
+
+//mixins
+@mixin dialog-general {
+    display: block;
+    background: $white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: solid 1px $shadow-active-clear;
+}
+@mixin center-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin center-column {
+    @include center-element;
+    flex-direction: column;
+}
+
+//manage color switching
+body {
+    --color-theme-main: hsl(0, 0%, 65%);
+    --color-theme-back: hsl(0, 0%, 84%);
+}
+body.leaf-theme {
+    --color-theme-main: hsl(120, 54%, 42%);
+    --color-theme-back: hsl(80, 64%, 55%);
+    // #a4d541
+}
+body.fire-theme {
+    --color-theme-main: hsl(17, 94%, 48%);
+    --color-theme-back: hsl(31, 83%, 53%);
+    // #ea8b24
+}
+body.water-theme {
+    --color-theme-main: hsl(200, 58%, 51%);
+    --color-theme-back: hsl(197, 71%, 78%);
+    //#a1d9ef
+}
+
+//icons
+.icon-info {
+    &::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-image: url("../assets/images/info.png");
+    }
+}
