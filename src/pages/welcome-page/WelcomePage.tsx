@@ -7,7 +7,7 @@ const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleActionButton = () => {
-    navigate(UrlRoutes.home);
+    navigate(UrlRoutes.home); 
   };
 
   React.useEffect(() => {
