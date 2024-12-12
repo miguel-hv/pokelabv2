@@ -6,16 +6,18 @@ import HomePage from '../pages/home-page/HomePage';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
 
+
 const AppRoutes: React.FC = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<Navigate to={UrlRoutes.poke} />} />
+        <Route path="/" element={<Navigate to={UrlRoutes.poke} replace/>} />
           <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
           <Route path={UrlRoutes.poke} element={<PokePage />} >
-            <Route path={UrlRoutes.home} element={<HomePage />} />
+            <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
+            <Route path={UrlRoutes.home.replace(`${UrlRoutes.poke}/`, '')} element={<HomePage />} />
           </Route>
-        <Route path="*" element={<Navigate to={UrlRoutes.poke} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );
