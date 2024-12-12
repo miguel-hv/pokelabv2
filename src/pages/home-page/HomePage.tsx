@@ -4,6 +4,23 @@ import { UrlRoutesRoot, UrlRoutes } from "../../enumerators/urlRoutes.enum";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import { useUserContext } from "../../user/context/UserContext";
 
+const MenuComponent: React.FC<{src: string | undefined; title: string}> = ({src, title}) => {
+  let styleUnique = "";
+  if (title === "Caldera") styleUnique = "menu__image-container--house";
+  return (
+    <div className="menu__item">
+      <div>{title}</div>
+      <div className={`menu__image-container ${styleUnique}`}>
+        <img
+          className="menu__image"
+          src={src}
+          alt={`${title} section`}
+        />
+      </div>
+    </div>
+  );
+};
+
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { secrets, pokemon } = useUserContext();
@@ -22,79 +39,38 @@ const HomePage: React.FC = () => {
   }, [secrets, navigate]);
 
   return (
-    <div>test</div>
-    // <div className="menu">
-    //   {/* Laboratory Link */}
-    //   <Link className="menu__link menu__link--hint card" to={urlSelectPokemon}>
-    //     <div className="menu__item">
-    //       <div>Laboratorio</div>
-    //       <div className="menu__image-container">
-    //         <img
-    //           className="menu__image"
-    //           src="/assets/images/map/lab.png"
-    //           alt="Laboratorio"
-    //         />
-    //       </div>
-    //     </div>
-    //   </Link>
+    <div className="menu">
+      <Link className="menu__link menu__link--hint card" to={urlSelectPokemon}>
+        <MenuComponent title="Laboratorio" src="../../../public/assets/images/map/lab.png" />  
+      </Link>
 
-    //   {/* Fire Secret Link */}
-    //   <Link
-    //     className={`menu__link card ${
-    //       pokemon?.type === pokemonType.fire ? "menu__link--hint" : ""
-    //     }`}
-    //     to={urlSecretFire}
-    //   >
-    //     <div className="menu__item">
-    //       <div className="menu__image-container menu__image-container--house">
-    //         <img
-    //           className="menu__image"
-    //           src="/assets/images/map/house.png"
-    //           alt="Caldera"
-    //         />
-    //       </div>
-    //       <div>Caldera</div>
-    //     </div>
-    //   </Link>
+      <Link
+        className={`menu__link card ${
+          pokemon?.type === pokemonType.fire ? "menu__link--hint" : ""
+        }`}
+        to={urlSecretFire}
+      >
+        <MenuComponent title="Caldera" src="../../../public/assets/images/map/house.png" /> 
+      </Link>
 
-    //   {/* Leaf Secret Link */}
-    //   <Link
-    //     className={`menu__link card ${
-    //       pokemon?.type === pokemonType.leaf ? "menu__link--hint" : ""
-    //     }`}
-    //     to={urlSecretLeaf}
-    //   >
-    //     <div className="menu__item">
-    //       <div>Jardín</div>
-    //       <div className="menu__image-container">
-    //         <img
-    //           className="menu__image"
-    //           src="/assets/images/map/garden.png"
-    //           alt="Jardín"
-    //         />
-    //       </div>
-    //     </div>
-    //   </Link>
+      <Link
+        className={`menu__link card ${
+          pokemon?.type === pokemonType.leaf ? "menu__link--hint" : ""
+        }`}
+        to={urlSecretLeaf}
+      >
+        <MenuComponent title="Jardín" src="../../../public/assets/images/map/garden.png" /> 
+      </Link>
 
-    //   {/* Water Secret Link */}
-    //   <Link
-    //     className={`menu__link card ${
-    //       pokemon?.type === pokemonType.water ? "menu__link--hint" : ""
-    //     }`}
-    //     to={urlSecretWater}
-    //   >
-    //     <div className="menu__item">
-    //       <div className="menu__image-container">
-    //         <img
-    //           className="menu__image"
-    //           src="/assets/images/map/laker.png"
-    //           alt="Piscina"
-    //         />
-    //       </div>
-    //       <div>Piscina</div>
-    //     </div>
-    //   </Link>
-    // </div>
+      <Link
+        className={`menu__link card ${
+          pokemon?.type === pokemonType.water ? "menu__link--hint" : ""
+        }`}
+        to={urlSecretWater}
+      >
+        <MenuComponent title="Piscina" src="../../../public/assets/images/map/lake.png" /> 
+      </Link>
+    </div>
   );
 };
 
