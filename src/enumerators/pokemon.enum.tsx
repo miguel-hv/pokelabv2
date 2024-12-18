@@ -1,4 +1,4 @@
-import { Pokemon } from "../../models/Pokemon.model";
+import { Pokemon } from "../models/Pokemon.model";
 
 export const PokemonList: Pokemon[] = [
     { name: 'bulbasaur', type: 'leaf' },
