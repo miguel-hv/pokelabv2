@@ -8,7 +8,7 @@ export const useUserStore = () => {
   const [secrets, setSecrets] = useState<string[]>([]);
 
   useEffect(() => {
-    // Mock data or fetch real data from an API
+    // TODO: user Store is in userContext; needs to manage user apart from pokemon and secrets
     setCurrentUser({
          username: "AshKetchum",
          email: "ash@mail.com",

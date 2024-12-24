@@ -11,8 +11,12 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [secrets, setSecrets] = useState<string[]>([]);
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [secrets, setSecrets] = useState<string[]>(["fire", "water"]);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(
+    { 
+    name: "charmander",
+    type: "fire" 
+  });
 
   return (
     <UserContext.Provider value={{ secrets, pokemon, setSecrets, setPokemon }}>

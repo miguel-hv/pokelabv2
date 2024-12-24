@@ -67,7 +67,7 @@ const SelectPokePage: React.FC = () => {
             </div>
             <div className="menu" >
                 { pokemonList.map((pokemon) => (
-                    <div className="menu__link card" onClick={() => handleSelectPokemon(pokemon)}>
+                    <div className="menu__link card" onClick={() => handleSelectPokemon(pokemon)} key={pokemon.name}>
                         <div className="menu__item">
                             <div className="menu__image-container">
                                 <img 
