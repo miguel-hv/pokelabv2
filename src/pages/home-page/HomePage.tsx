@@ -3,23 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UrlRoutesRoot, UrlRoutes } from "../../enumerators/urlRoutes.enum";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import { useUserContext } from "../../user/context/UserContext";
-
-const MenuComponent: React.FC<{src: string | undefined; title: string}> = ({src, title}) => {
-  let styleUnique = "";
-  if (title === "Caldera") styleUnique = "menu__image-container--house";
-  return (
-    <div className="menu__item">
-      <div>{title}</div>
-      <div className={`menu__image-container ${styleUnique}`}>
-        <img
-          className="menu__image"
-          src={src}
-          alt={`${title} section`}
-        />
-      </div>
-    </div>
-  );
-};
+import MenuComponent from "./MenuCoponent";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,6 +21,11 @@ const HomePage: React.FC = () => {
       navigate(UrlRoutes.end);
     }
   }, [secrets, navigate]);
+
+  useEffect(() => {
+    console.log(secrets);
+    console.log(pokemon);
+  }, []);
 
   return (
     <div className="menu">
