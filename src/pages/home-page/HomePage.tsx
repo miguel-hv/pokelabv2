@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="menu">
       <Link className="menu__link menu__link--hint card" to={urlSelectPokemon}>
-        <MenuComponent title="Laboratorio" src="../../../public/assets/images/map/lab.png" />  
+        <MenuComponent title="Laboratorio" src="../../../assets/images/map/lab.png" />  
       </Link>
 
       <Link
@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
         }`}
         to={urlSecretFire}
       >
-        <MenuComponent title="Caldera" src="../../../public/assets/images/map/house.png" /> 
+        <MenuComponent title="Caldera" src="../../../assets/images/map/house.png" /> 
       </Link>
 
       <Link
@@ -48,7 +48,7 @@ const HomePage: React.FC = () => {
         }`}
         to={urlSecretLeaf}
       >
-        <MenuComponent title="Jardín" src="../../../public/assets/images/map/garden.png" /> 
+        <MenuComponent title="Jardín" src="../../../assets/images/map/garden.png" /> 
       </Link>
 
       <Link
@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
         }`}
         to={urlSecretWater}
       >
-        <MenuComponent title="Piscina" src="../../../public/assets/images/map/lake.png" /> 
+        <MenuComponent title="Piscina" src="../../../assets/images/map/lake.png" /> 
       </Link>
     </div>
   );

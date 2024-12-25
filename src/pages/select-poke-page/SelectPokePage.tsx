@@ -72,7 +72,7 @@ const SelectPokePage: React.FC = () => {
                             <div className="menu__image-container">
                                 <img 
                                     className="menu__image"
-                                    src={`	../../../public/assets/images/pokemon/${pokemon.name}_sprt.png`}
+                                    src={`	../../../assets/images/pokemon/${pokemon.name}_sprt.png`}
                                     alt={pokemon.name}
                                 />
                             </div>
