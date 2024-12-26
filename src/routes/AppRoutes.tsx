@@ -1,33 +1,34 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { UrlRoutes } from '../enumerators/urlRoutes.enum';
-import PokePage from '../pages/poke-page/PokePage';
-import HomePage from '../pages/home-page/HomePage';
-import SelectPokePage from '../pages/select-poke-page/SelectPokePage';
-import FireSecret from '../pages/secret-page/FireSecretPage';
-import WaterSecret from '../pages/secret-page/WaterSecretPage';
-import LeafSecret from '../pages/secret-page/LeafSecretPage';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
+const PokePage = lazy(() => import('../pages/poke-page/PokePage'));
+const HomePage = lazy(() => import('../pages/home-page/HomePage'));
+const SelectPokePage = lazy(() => import('../pages/select-poke-page/SelectPokePage'));
+const FireSecret = lazy(() => import('../pages/secret-page/FireSecretPage'));
+const WaterSecret = lazy(() => import('../pages/secret-page/WaterSecretPage'));
+const LeafSecret = lazy(() => import('../pages/secret-page/LeafSecretPage'));
+
 
 
 const AppRoutes: React.FC = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<Navigate to={UrlRoutes.poke} replace/>} />
+        <Route path="/" element={<Navigate to={"poke"} replace/>} />
 
           <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
           <Route path={UrlRoutes.poke} element={<PokePage />} >
             <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
-            <Route path={UrlRoutes.home.replace(`${UrlRoutes.poke}/`, '')} element={<HomePage />} />
-            <Route path={UrlRoutes.selectPokemon.replace(`${UrlRoutes.poke}/`, '')} element={<SelectPokePage />} />
-            <Route path={UrlRoutes.secrets.replace(`${UrlRoutes.poke}/`, '')}>
-              <Route path={UrlRoutes.secretFire.replace(`${UrlRoutes.poke}/`, '')} element={<FireSecret />} />
-              <Route path={UrlRoutes.secretWater.replace(`${UrlRoutes.poke}/`, '')} element={<WaterSecret />} />
-              <Route path={UrlRoutes.secretLeaf.replace(`${UrlRoutes.poke}/`, '')} element={<LeafSecret />} />
-              <Route index element={<Navigate to={UrlRoutes.poke.replace(`${UrlRoutes.poke}/`, '')} replace />} />
-              <Route path="*" element={<Navigate to={UrlRoutes.poke.replace(`${UrlRoutes.poke}/`, '')} replace />} />
+            <Route path={UrlRoutes.home} element={<HomePage />} />
+            <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
+            <Route path={UrlRoutes.secrets}>
+              <Route path={UrlRoutes.secretFire} element={<FireSecret />} />
+              <Route path={UrlRoutes.secretWater} element={<WaterSecret />} />
+              <Route path={UrlRoutes.secretLeaf} element={<LeafSecret />} />
+              <Route index element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
+              <Route path="*" element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
             </Route>
           </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
