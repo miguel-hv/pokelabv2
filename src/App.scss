@@ -25,7 +25,7 @@ html, body {
           height: 100%;
           opacity: 0.7;
           z-index: $bottom-layer-index;
-          background-image: url(../assets/images/backgrounds/background.jpg);
+          background-image: url(/assets/images/backgrounds/background.jpg);
           filter: invert(1) brightness(0.75);
       }
   }
@@ -144,16 +144,16 @@ html, body {
         background-position: center;
         background-size: 180%;
         &--bulbasaur {
-            background-image: url(../assets/images/pokemon/bulbasaur_sprt.png);
+            background-image: url(/assets/images/pokemon/bulbasaur_sprt.png);
         }
         &--charmander {
-            background-image: url(../assets/images/pokemon/charmander_sprt.png);
+            background-image: url(/assets/images/pokemon/charmander_sprt.png);
         }
         &--squirtle {
-            background-image: url(../assets/images/pokemon/squirtle_sprt.png);
+            background-image: url(/assets/images/pokemon/squirtle_sprt.png);
         }
         &--ball {
-            background-image: url(../assets/images/pokemon/ball.png);
+            background-image: url(/assets/images/pokemon/ball.png);
         }
     }
     &__data-container {
@@ -289,7 +289,7 @@ html, body {
         width: 150px;
         background-position: 57% 50%;
         background-size: 180%;
-        background-image: url(../assets/images/pokemon/mew.png);
+        background-image: url(/assets/images/pokemon/mew.png);
         filter: drop-shadow(0px 0px 11px $action-main);
     }
     &__button {
