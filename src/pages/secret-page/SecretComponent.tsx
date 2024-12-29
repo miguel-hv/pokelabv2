@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DialogOak from "../../components/shared/DialogOak";
 
 interface SecretComponentProps {
     textSecretType: string;
@@ -29,11 +30,14 @@ const SecretComponent: React.FC<SecretComponentProps> = ({textSecretType, textSe
         setDialogOpen(true);
     };
 
-    const handleDialogClose = (result: string) => {
+    const handleDialogClose = () => {
         setDialogOpen(false);
-        if (result === "OK") {
-          navigateBack();
-        }
+        navigateBack();
+    };
+
+    const handleDialogAccept = () => {
+        setDialogOpen(false);
+        navigateBack();
     };
 
     const navigateBack = () => {
@@ -46,14 +50,16 @@ const SecretComponent: React.FC<SecretComponentProps> = ({textSecretType, textSe
                 {textSecretType}
             </div>
             <img className ="secret__image" src={imagePath} alt="image"/>
-            {/* {isDialogOpen && (
-                // <DialogInfo
-                // maxWidth={resizeService.getWidth()} // Assuming `resizeService.getWidth()` provides dimensions
-                // minWidth={resizeService.getWidth()}
-                // data={dialogSettings}
-                // onClose={handleDialogClose}
-                // />
-            )} */}
+            {isDialogOpen && (
+                <DialogOak
+                    open={isDialogOpen}
+                    onClose={handleDialogClose}
+                    onAccept={handleDialogAccept}
+                    description={dialogSettings.description}
+                    okButton={dialogSettings.ok}
+                    noButton={dialogSettings.no}
+                />
+            )}
         </div>
     );
 }

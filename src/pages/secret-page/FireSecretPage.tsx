@@ -6,6 +6,7 @@ import SecretComponent from "./SecretComponent";
 const FireSecret: React.FC = () => {
   const typesList = PokemonType;
   const { secrets, setSecrets } = useUserContext(); 
+  let textSecret = '';
   const textSecretType =
     "El pokémon tipo fuego más poderoso de los 151 originales es Arcanine.";
   const textNewSecret = "¡Has conseguido el secreto tipo fuego!";
@@ -14,12 +15,13 @@ const FireSecret: React.FC = () => {
   useEffect(() => {
     if (!secrets.includes(typesList.fire)) {
       setSecrets([...secrets, typesList.fire]);
+      textSecret = textNewSecret;
     }
   }, []);
 
   return (
     <SecretComponent
-      textSecret={textNewSecret}
+      textSecret={textSecret}
       textSecretType={textSecretType}
       imagePath={imagePath}
     />
