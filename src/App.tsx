@@ -6,13 +6,13 @@ import { UserProvider } from './user/context/UserContext';
 function App() {
 
   return (
-    <div className="screen-container__full-screen">
-      <Router>
-        <UserProvider>
-          <AppRoutes />
-        </UserProvider>
-      </Router>
-    </div>
+      <div className="screen-container__full-screen">
+        <Router>
+          <UserProvider>
+            <AppRoutes />
+          </UserProvider>
+        </Router>
+      </div>
   );
 }
 

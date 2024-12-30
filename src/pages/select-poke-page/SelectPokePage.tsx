@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const SelectPokePage: React.FC = () => {
     const auth = useAuth();
-    // const resizeService = useResizeService(); //TODO: resize screen service
     const navigate = useNavigate();
 
     const pokemonSelected = useUserContext().pokemon;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Modal } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 
 interface DialogOakProps {
     open: boolean;
@@ -52,15 +52,14 @@ const DialogOak: React.FC<DialogOakProps> = ({ open, onClose, onAccept, descript
           noButton && (<button onClick={onClose} className="button button--secondary">{noButton}</button>)
         }
       </div>
-      {/* TODO: Add buttons */}
-      {/* <Box display="flex" justifyContent="center" gap={2}>
+      <Box display="flex" justifyContent="center" gap={2}>
         <Button variant="contained" color="primary" onClick={onAccept}>
           Accept
         </Button>
         <Button variant="outlined" color="secondary" onClick={onClose}>
           Close
         </Button>
-      </Box> */}
+      </Box>
     </Box>
   </Modal>
 );

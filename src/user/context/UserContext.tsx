@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import { Pokemon } from "../../models/Pokemon.model";
 
 interface UserContextType {
@@ -17,6 +17,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     name: "charmander",
     type: "fire" 
   });
+
+  useEffect(() => {
+    document.body.classList.remove('leaf-theme', 'fire-theme', 'water-theme');
+
+    if (pokemon?.type) {
+      document.body.classList.add(`${pokemon.type}-theme`);
+    }
+  }, [pokemon]); 
 
   return (
     <UserContext.Provider value={{ secrets, pokemon, setSecrets, setPokemon }}>

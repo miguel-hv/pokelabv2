@@ -1,4 +1,7 @@
+type ThemeList = 'leaf' | 'fire' | 'water';
+type PokemonList = 'bulbasaur' | 'charmander' | 'squirtle';
+
 export interface Pokemon {
-    name: string;
-    type: string;
+    name: PokemonList;
+    type: ThemeList;
 }
