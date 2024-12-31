@@ -2,28 +2,26 @@ import React, { useEffect } from "react";
 import { useUserContext } from "../../user/context/UserContext";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import SecretComponent from "./SecretComponent";
+import { Texts } from "../../resources/texts";
 
 const FireSecret: React.FC = () => {
   const typesList = PokemonType;
   const { secrets, setSecrets } = useUserContext(); 
   let textSecret = '';
-  const textSecretType =
-    "El pokémon tipo fuego más poderoso de los 151 originales es Arcanine.";
-  const textNewSecret = "¡Has conseguido el secreto tipo fuego!";
-  const imagePath = "../../../../assets/images/pokemon/charmander.png";
+  const { TypeDescription, NewSecret, ImagePath } = Texts.FireSecret;
 
   useEffect(() => {
     if (!secrets.includes(typesList.fire)) {
       setSecrets([...secrets, typesList.fire]);
-      textSecret = textNewSecret;
+      textSecret = NewSecret;
     }
   }, []);
 
   return (
     <SecretComponent
       textSecret={textSecret}
-      textSecretType={textSecretType}
-      imagePath={imagePath}
+      textSecretType={TypeDescription}
+      imagePath={ImagePath}
     />
   );
 };
