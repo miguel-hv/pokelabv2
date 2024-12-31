@@ -47,19 +47,11 @@ const DialogOak: React.FC<DialogOakProps> = ({ open, onClose, onAccept, descript
       </div>
       <div className="dialog__buttons-container">
         {
-          okButton && (<button onClick={onAccept} className="button button--primary">{okButton}</button>)
+          okButton && (<Button onClick={onAccept} variant="contained">{okButton}</Button>)
         }{
-          noButton && (<button onClick={onClose} className="button button--secondary">{noButton}</button>)
+          noButton && (<Button onClick={onClose} variant="outlined">{noButton}</Button>)
         }
       </div>
-      <Box display="flex" justifyContent="center" gap={2}>
-        <Button variant="contained" color="primary" onClick={onAccept}>
-          Accept
-        </Button>
-        <Button variant="outlined" color="secondary" onClick={onClose}>
-          Close
-        </Button>
-      </Box>
     </Box>
   </Modal>
 );

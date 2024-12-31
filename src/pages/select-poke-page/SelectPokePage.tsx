@@ -5,6 +5,7 @@ import { useUserContext } from "../../user/context/UserContext";
 import { DialogContent } from "../../models/DialogText.model";
 import { useAuth } from "../../auth/services/AuthService";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const SelectPokePage: React.FC = () => {
     const auth = useAuth();
@@ -60,9 +61,9 @@ const SelectPokePage: React.FC = () => {
     return (
         <div className="screen-container__inner">
             <div className="button-container">
-                <button className="button button--primary" onClick={handleGoBack}>
+                <Button variant="contained" onClick={handleGoBack}>
                     Volver
-                </button>
+                </Button>
             </div>
             <div className="menu" >
                 { pokemonList.map((pokemon) => (

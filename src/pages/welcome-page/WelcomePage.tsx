@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UrlRoutes } from '../../enumerators/urlRoutes.enum';
 import './WelcomePage.scss'; // Import the SCSS file for styling
+import { Button } from '@mui/material';
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -51,9 +52,9 @@ const WelcomePage: React.FC = () => {
         <p className="welcome-call__text">
           Consigue los secretos de fuego, agua y planta en las distintas ubicaciones.
         </p>
-        <button className="button button--action" onClick={handleActionButton}>
+        <Button variant="contained" onClick={handleActionButton}>
           ¡Vamos allá!
-        </button>
+        </Button>
       </div>
     </div>
   );

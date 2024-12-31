@@ -64,63 +64,6 @@ html, body {
     }
 }
 
-.button {
-    box-shadow: 0 0 10px 0.5px rgba(0, 0, 0, 0);
-    transition: all 0.15s linear;
-    border-radius: 5px;
-    background-color: transparent;
-    font-weight: 600;
-    &:hover {
-        box-shadow: 0 0 10px 0.5px rgba(0, 0, 0, 0.2);
-        transform: scale(0.98);
-        background: shade($action-main, 5%);
-        cursor: pointer;
-    }
-    &:active,
-    &:focus {
-        outline: none;
-    }
-    &__container {
-        width: 90%;
-        margin: auto;
-    }
-    &--action {
-        border: none;
-        background: $action-main;
-        color: $action-secondary;
-        width: 150px;
-        height: 50px;
-        font-size: 1rem; 
-        letter-spacing: 1.5px;
-    }
-    &--primary {
-        border: none;
-        color: $action-secondary;
-        background: $action-main;
-        padding: 5px 10px;
-    }
-    &--secondary {
-        border: $action-main solid 2px;
-        color: $action-secondary;
-        padding: 5px 10px;
-    }
-    &--link {
-        @include center-element;
-        height: initial;
-        width: initial;
-        gap: 5px;
-        padding: 5px 10px;
-        font-weight: 500;
-    }
-    &--image {
-        width: 32px;
-    }
-    &--round {
-        border-radius: 50%;
-        padding: 5px;
-    }
-}
-
 .header {
     display: flex;
     justify-content: space-between;

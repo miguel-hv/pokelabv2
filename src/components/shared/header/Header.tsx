@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.scss"; // Assuming SCSS is set up properly
 import { useAuth } from "../../../auth/services/AuthService";
 import { useUserStore } from "../../../user/store/userStore"; // Custom hooks for state
+import { Button } from "@mui/material";
 
 const Header: React.FC = () => {
   const { selectedPokemon, currentUser, secrets } = useUserStore();
@@ -41,9 +42,9 @@ const Header: React.FC = () => {
 
           <div className="header__state-container">
             <div className="header__logout">
-              <button className="button button--secondary" onClick={logout}>
+              <Button variant="outlined" color="primary" onClick={logout}>
                 Logout
-              </button>
+              </Button>
             </div>
 
             <div className="header__data-container header__data-container--header">
