@@ -19,17 +19,18 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<Navigate to={"poke"} replace/>} />
 
           <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
-          <Route path={UrlRoutes.poke} element={<PokePage />} >
-            <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
-            <Route path={UrlRoutes.home} element={<HomePage />} />
-            <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
-            <Route path={UrlRoutes.secrets}>
+          <Route path={UrlRoutes.secrets}>
               <Route path={UrlRoutes.secretFire} element={<FireSecret />} />
               <Route path={UrlRoutes.secretWater} element={<WaterSecret />} />
               <Route path={UrlRoutes.secretLeaf} element={<LeafSecret />} />
               <Route index element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
               <Route path="*" element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
-            </Route>
+          </Route>
+          <Route path={UrlRoutes.poke} element={<PokePage />} >
+            <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
+            <Route path={UrlRoutes.home} element={<HomePage />} />
+            <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
+            
           </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
