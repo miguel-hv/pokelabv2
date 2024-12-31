@@ -33,6 +33,7 @@ const backdropStyle = {
 const DialogOak: React.FC<DialogOakProps> = ({ open, onClose, onAccept, description, okButton, noButton }) => (
   <Modal 
     open={open} 
+    className="dialog"
     onClose={onClose}
     aria-labelledby="modal-Oak"
     aria-describedby="modal-Oak-professor-dialog"

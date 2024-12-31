@@ -184,7 +184,6 @@ html, body {
 }
 
 .dialog {
-    position: relative;
     @include font-poke;
 
     &__image-container {
