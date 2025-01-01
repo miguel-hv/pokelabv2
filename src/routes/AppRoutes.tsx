@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { UrlRoutes } from '../enumerators/urlRoutes.enum';
+import RegisterPage from '../pages/register-page/RegisterPage';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
 const PokePage = lazy(() => import('../pages/poke-page/PokePage'));
@@ -17,8 +18,8 @@ const AppRoutes: React.FC = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Navigate to={"poke"} replace/>} />
-
           <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
+          <Route path={UrlRoutes.access} element={<RegisterPage />} />
           <Route path={UrlRoutes.secrets}>
               <Route path={UrlRoutes.secretFire} element={<FireSecret />} />
               <Route path={UrlRoutes.secretWater} element={<WaterSecret />} />
