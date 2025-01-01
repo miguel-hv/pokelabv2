@@ -6,13 +6,18 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
-  const [username, setUsername] = useState('');
-
+    //only one field but prepared for scalable form
+  const [formState, setFormState] = useState({username: ''});
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
+  }
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim()) {
-      onSubmit(username);
-      setUsername('');
+    if (formState.username.trim()) {
+        onSubmit(formState.username);
+        setFormState({ username: '' });
     }
   };
 
@@ -20,11 +25,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} className='form'>
         <TextField 
             id="username"
+            name="username"
             label="Alias"
             color="secondary"
             variant="outlined"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
+            onChange={handleChange}
+            value={formState.username}
             fullWidth
             required
         />

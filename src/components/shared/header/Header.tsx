@@ -1,28 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.scss"; // Assuming SCSS is set up properly
-import { useAuth } from "../../../auth/services/AuthService";
-import { useUserStore } from "../../../user/store/userStore"; // Custom hooks for state
 import { Button } from "@mui/material";
+import { useUserContext } from "../../../user/context/UserContext";
 
 const Header: React.FC = () => {
-  const { selectedPokemon, currentUser, secrets } = useUserStore();
-  const { logout } = useAuth();
-
+  const { pokemon, username, secrets } = useUserContext();
   const imageTitleSrc = "/assets/images/backgrounds/logo.png";
+
+  useEffect(() => {console.log(username+"from header")}, []);
+
+  const handleLogout = () => {
+    console.log("logout");
+  };
 
   return (
     <div className="header card">
-      {currentUser ? (
+      {username ? (
         <>
           <div className="header__userid-container">
             <div
               className={`header__image-container ${
-                selectedPokemon
-                  ? selectedPokemon.name === "bulbasaur"
+                pokemon
+                  ? pokemon.name === "bulbasaur"
                     ? "header__image-container--bulbasaur"
-                    : selectedPokemon.name === "charmander"
+                    : pokemon.name === "charmander"
                     ? "header__image-container--charmander"
-                    : selectedPokemon.name === "squirtle"
+                    : pokemon.name === "squirtle"
                     ? "header__image-container--squirtle"
                     : ""
                   : "header__image-container--ball"
@@ -31,18 +34,18 @@ const Header: React.FC = () => {
 
             <div className="header__data-container">
               <div className="header__text--title">
-                {selectedPokemon?.name && (
-                  selectedPokemon.name.charAt(0).toUpperCase() +
-                  selectedPokemon.name.slice(1)
+                {pokemon?.name && (
+                  pokemon.name.charAt(0).toUpperCase() +
+                  pokemon.name.slice(1)
                 )}
               </div>
-              <div className="header__text--sub">{currentUser.username}</div>
+              <div className="header__text--sub">{username}</div>
             </div>
           </div>
 
           <div className="header__state-container">
             <div className="header__logout">
-              <Button variant="outlined" color="primary" onClick={logout}>
+              <Button variant="outlined" color="primary" onClick={handleLogout}>
                 Logout
               </Button>
             </div>

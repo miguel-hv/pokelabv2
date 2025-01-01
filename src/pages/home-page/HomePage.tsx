@@ -22,11 +22,6 @@ const HomePage: React.FC = () => {
     }
   }, [secrets, navigate]);
 
-  useEffect(() => {
-    console.log(secrets);
-    console.log(pokemon);
-  }, []);
-
   return (
     <div className="menu">
       <Link className="menu__link menu__link--hint card" to={urlSelectPokemon}>
