@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RegisterForm from "./RegisterForm";
 import { useAuth } from "../../customHooks/useAuth";
+import { useUserContext } from "../../user/context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { UrlRoutes } from "../../enumerators/urlRoutes.enum";
 
 const RegisterPage: React.FC = () => {
     const { login } = useAuth();
+    const { username } = useUserContext();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (username) {
+          navigate(UrlRoutes.home, { replace: true });
+        }
+      }, [username]);
 
     const handleFormSubmit = (username: string) => {
         login(username);
     }
+
     return (
         <div className="screen-container__access">
             <div className="card">
