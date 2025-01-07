@@ -1,8 +1,9 @@
 import React from "react";
 import RegisterForm from "./RegisterForm";
-import { login } from "../../services/AuthService";
+import { useAuth } from "../../customHooks/useAuth";
 
 const RegisterPage: React.FC = () => {
+    const { login } = useAuth();
 
     const handleFormSubmit = (username: string) => {
         login(username);
