@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Header.scss"; // Assuming SCSS is set up properly
 import { Button } from "@mui/material";
 import { useUserContext } from "../../../user/context/UserContext";
 
 const Header: React.FC = () => {
-  const { pokemon, username, secrets } = useUserContext();
+  const { pokemon, username, secrets, setPokemon, setUsername, setSecrets } = useUserContext();
   const imageTitleSrc = "/assets/images/backgrounds/logo.png";
-
-  useEffect(() => {console.log(username+"from header")}, []);
-
   const handleLogout = () => {
-    console.log("logout");
+    //TODO: move to service
+    setPokemon(null);
+    setUsername('');
+    setSecrets([]);
   };
 
   return (

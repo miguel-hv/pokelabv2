@@ -38,9 +38,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [pokemon]); 
 
   useEffect(() => {
-    if (username) {
+    // if (username) {
       localStorage.setItem('username', username);
-    }
+    // }
   }, [username]);
 
   useEffect(() => {
