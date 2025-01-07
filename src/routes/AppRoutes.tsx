@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { UrlRoutes } from '../enumerators/urlRoutes.enum';
 import RegisterPage from '../pages/register-page/RegisterPage';
+import UserProtectedRoute from './UserProtectedRoute';
+import SecretProtectedRoute from './SecretProtectedRoute';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
 const PokePage = lazy(() => import('../pages/poke-page/PokePage'));
@@ -18,22 +20,46 @@ const AppRoutes: React.FC = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Navigate to={"poke"} replace/>} />
-          <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
           <Route path={UrlRoutes.access} element={<RegisterPage />} />
-          <Route path={UrlRoutes.secrets}>
-              <Route path={UrlRoutes.secretFire} element={<FireSecret />} />
-              <Route path={UrlRoutes.secretWater} element={<WaterSecret />} />
-              <Route path={UrlRoutes.secretLeaf} element={<LeafSecret />} />
+          
+          <Route element={<UserProtectedRoute />}>
+            <Route path={UrlRoutes.welcome} element={<WelcomePage />} />
+            <Route path={UrlRoutes.secrets}>
+              <Route
+                path={UrlRoutes.secretFire}
+                element={
+                  <SecretProtectedRoute type="fire">
+                    <FireSecret />
+                  </SecretProtectedRoute>
+                }
+              />
+              <Route
+                path={UrlRoutes.secretWater}
+                element={
+                  <SecretProtectedRoute type="water">
+                    <WaterSecret />
+                  </SecretProtectedRoute>
+                }
+              />
+              <Route
+                path={UrlRoutes.secretLeaf}
+                element={
+                  <SecretProtectedRoute type="leaf">
+                    <LeafSecret />
+                  </SecretProtectedRoute>
+                }
+              />
               <Route index element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
               <Route path="*" element={<Navigate to={`/${UrlRoutes.poke}`} replace />} />
+            </Route>
+            <Route path={UrlRoutes.poke} element={<PokePage />} >
+              <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
+              <Route path={UrlRoutes.home} element={<HomePage />} />
+              <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
+            </Route>
           </Route>
-          <Route path={UrlRoutes.poke} element={<PokePage />} >
-            <Route index element={<Navigate to={UrlRoutes.home} replace/>} />
-            <Route path={UrlRoutes.home} element={<HomePage />} />
-            <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
-            
-          </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+          <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );
