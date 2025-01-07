@@ -1,16 +1,11 @@
 import React from "react";
 import RegisterForm from "./RegisterForm";
-import { useUserContext } from "../../user/context/UserContext";
-import { useNavigate } from "react-router-dom";
-import { UrlRoutes } from "../../enumerators/urlRoutes.enum";
+import { login } from "../../services/AuthService";
 
 const RegisterPage: React.FC = () => {
-    const { setUsername } = useUserContext();
-    const navigate = useNavigate();
 
     const handleFormSubmit = (username: string) => {
-        setUsername(username);
-        navigate(UrlRoutes.welcome);
+        login(username);
     }
     return (
         <div className="screen-container__access">

@@ -2,15 +2,13 @@ import React from "react";
 import "./Header.scss"; // Assuming SCSS is set up properly
 import { Button } from "@mui/material";
 import { useUserContext } from "../../../user/context/UserContext";
+import { logout } from "../../../services/AuthService";
 
 const Header: React.FC = () => {
-  const { pokemon, username, secrets, setPokemon, setUsername, setSecrets } = useUserContext();
+  const { pokemon, username, secrets } = useUserContext();
   const imageTitleSrc = "/assets/images/backgrounds/logo.png";
   const handleLogout = () => {
-    //TODO: move to service
-    setPokemon(null);
-    setUsername('');
-    setSecrets([]);
+    logout();
   };
 
   return (
