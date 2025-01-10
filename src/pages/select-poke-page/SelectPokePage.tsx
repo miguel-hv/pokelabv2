@@ -1,57 +1,58 @@
 import { useState } from "react";
 import { PokemonList } from "../../enumerators/pokemon.enum";
 import { Pokemon } from "../../models/Pokemon.model";
-import { useUserContext } from "../../user/context/UserContext";
 import { DialogContent } from "../../models/DialogText.model";
-import { useAuth } from "../../auth/services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { usePokemon } from "../../customHooks/usePokemon";
+import DialogOak from "../../components/shared/DialogOak";
 
 const SelectPokePage: React.FC = () => {
-    const auth = useAuth();
+    const { pokemon, setPokemon } = usePokemon();
     const navigate = useNavigate();
-
-    const pokemonSelected = useUserContext().pokemon;
     const pokemonList = PokemonList;
-
-    const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+    const [newPokemon, setNewPokemon] = useState<Pokemon | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
     const [dialogSettings, setDialogSettings] = useState<DialogContent>({
         description: '',
         ok: '¡Elegir!',
         no: 'Mejor no',
     });    
 
-    const handleSelectPokemon = (pokemon: Pokemon) => {
-        if(pokemon.name === pokemonSelected?.name) {
+    const handleDialogOpen = (clickedPokemon: Pokemon) => {
+        if(pokemon?.name === clickedPokemon?.name) {
             setDialogSettings({
               description: '¡Ya tienes elegido ese pokemon!',
               ok: '',
               no: 'Entendido',
             });
-          } else {
+        } else {
             const dialogTexts: Record<string, string> = {
                 charmander: '¿Quieres elegir a Charmander, el pokémon tipo fuego?',
                 squirtle: '¿Quieres elegir a Squirtle, el pokémon tipo agua?',
                 bulbasaur: '¿Quieres elegir a Bulbasaur, el pokémon tipo planta?',
             };
             setDialogSettings({
-                description: dialogTexts[pokemon.name] || '',
-                ok: '',
-                no: 'Entendido',
-              });
-          }
-          setSelectedPokemon(pokemon); //TODO: cambiar a actualizar el usercontext
-          setIsDialogOpen(true);
+                description: dialogTexts[clickedPokemon.name] || '',
+                ok: '¡Elegir!',
+                no: 'Mejor no',
+            });
+        }
+        setNewPokemon(clickedPokemon);
+        setIsDialogOpen(true);
+        console.log(dialogSettings);
     }
 
-    const handleDialogClose = (response: string) => {
+    const handleDialogAccept = () => {
         setIsDialogOpen(false);
-        if (response === 'OK' && selectedPokemon) {
-            auth.updatePokemon(selectedPokemon);
+        if (newPokemon) {
+            setPokemon(newPokemon);
             handleGoBack();
         }
+    };
+
+    const handleDialogClose = () => {
+        setIsDialogOpen(false);
     };
 
       const handleGoBack = () => {
@@ -67,7 +68,7 @@ const SelectPokePage: React.FC = () => {
             </div>
             <div className="menu" >
                 { pokemonList.map((pokemon) => (
-                    <div className="menu__link card" onClick={() => handleSelectPokemon(pokemon)} key={pokemon.name}>
+                    <div className="menu__link card" onClick={() => handleDialogOpen(pokemon)} key={pokemon.name}>
                         <div className="menu__item">
                             <div className="menu__image-container">
                                 <img 
@@ -82,13 +83,14 @@ const SelectPokePage: React.FC = () => {
                 ))}
             </div>
             {isDialogOpen && (
-                <div> dialog open </div> //TODO: create dialog
-                // <DialogInfoComponent
-                //     maxWidth={resizeService.getWidth()}
-                //     minWidth={resizeService.getWidth()}
-                //     data={dialogSettings}
-                //     onClose={handleDialogClose}
-                // />
+                <DialogOak
+                    open={isDialogOpen}
+                    onClose={handleDialogClose}
+                    onAccept={handleDialogAccept}
+                    description={dialogSettings.description}
+                    okButton={dialogSettings.ok}
+                    noButton={dialogSettings.no}
+                />
             )}
         </div>
     )
