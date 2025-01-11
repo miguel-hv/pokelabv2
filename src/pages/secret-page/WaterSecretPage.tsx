@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import SecretComponent from "./SecretComponent";
 import { Texts } from "../../resources/texts";
@@ -8,13 +8,13 @@ const WaterSecret: React.FC = () => {
   const typesList = PokemonType;
   const { secrets, addSecret } = useSecrets(); 
 
-  let textSecret = '';
  const { TypeDescription, NewSecret, ImagePath } = Texts.WaterSecret;
+ const [ textSecret, setTextSecret ] = useState('');
 
   useEffect(() => {
     if (!secrets.includes(typesList.water)) {
       addSecret(typesList.water);
-      textSecret = NewSecret;
+      setTextSecret(NewSecret);
     }
   }, []);
 
