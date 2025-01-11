@@ -12,7 +12,7 @@ interface SecretProtectedRouteProps {
 const SecretProtectedRoute: React.FC<SecretProtectedRouteProps> = ({ type, children }) => {
   const { pokemon } = useUserContext();
 
-  if (pokemon && type === pokemon.type) {
+  if (pokemon && type !== pokemon.type) {
     return <Navigate to={UrlRoutes.home} replace />;
   }
 
