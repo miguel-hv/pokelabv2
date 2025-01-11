@@ -1,11 +1,14 @@
 import React from "react";
 import "./Header.scss"; // Assuming SCSS is set up properly
 import { Button } from "@mui/material";
-import { useUserContext } from "../../../user/context/UserContext";
 import { useAuth } from "../../../customHooks/useAuth";
+import { usePokemon } from "../../../customHooks/usePokemon";
+import { useSecrets } from "../../../customHooks/useSecrets";
 
 const Header: React.FC = () => {
-  const { pokemon, username, secrets } = useUserContext();
+  const { username } = useAuth();
+  const { pokemon } = usePokemon();
+  const { secrets } = useSecrets();
   const imageTitleSrc = "/assets/images/backgrounds/logo.png";
   const { logout } = useAuth();
   

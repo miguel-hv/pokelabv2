@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UrlRoutesRoot, UrlRoutes } from "../../enumerators/urlRoutes.enum";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
-import { useUserContext } from "../../user/context/UserContext";
 import MenuComponent from "./MenuCoponent";
+import { useSecrets } from "../../customHooks/useSecrets";
+import { usePokemon } from "../../customHooks/usePokemon";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { secrets, pokemon } = useUserContext();
+  const { secrets } = useSecrets();
+  const { pokemon } = usePokemon();
   const pokemonType = PokemonType;
 
   // URLs

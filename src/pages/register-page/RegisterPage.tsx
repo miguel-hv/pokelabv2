@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import RegisterForm from "./RegisterForm";
 import { useAuth } from "../../customHooks/useAuth";
-import { useUserContext } from "../../user/context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { UrlRoutes } from "../../enumerators/urlRoutes.enum";
 
 const RegisterPage: React.FC = () => {
     const { login } = useAuth();
-    const { username } = useUserContext();
+    const { username } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {

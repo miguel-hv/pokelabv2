@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { UrlRoutes } from "../enumerators/urlRoutes.enum";
-import { useUserContext } from "../user/context/UserContext";
+import { useAuth } from "../customHooks/useAuth";
 
 
 const UserProtectedRoute: React.FC = () => {
-    const { username } = useUserContext();
+    const { username } = useAuth();
 
     if (!username) {
         return <Navigate to={UrlRoutes.access} replace />;

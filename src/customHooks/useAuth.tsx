@@ -3,7 +3,7 @@ import { UrlRoutes } from "../enumerators/urlRoutes.enum";
 import { useUserContext } from "../user/context/UserContext";
 
 export const useAuth = () => {
-    const {setPokemon, setUsername, setSecrets} = useUserContext();
+    const {username, setPokemon, setUsername, setSecrets} = useUserContext();
     const navigate = useNavigate();
 
     const login = (username: string) => {
@@ -18,6 +18,7 @@ export const useAuth = () => {
     }
 
     return {
+        username,
         login,
         logout
     }
