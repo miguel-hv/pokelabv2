@@ -6,10 +6,10 @@ import { storage } from "./storageService";
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [secrets, setSecrets] = useState<TypeList[]>([]);
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [secrets, setSecrets] = useState<TypeList[]>(storage.get('secrets') || []);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(storage.get('pokemon') || null);
   // const [user, setUser] = useState<User | null>(null); // TODO: set user when using backend 
-  const [username, setUsername] = useState<string>('');
+  const [username, setUsername] = useState<string>(storage.get('username') || '');
 
   useEffect(() => {
     if (secrets.length > 0) {
@@ -22,11 +22,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       storage.set('pokemon', pokemon);
     } 
     
-  // css theme change based on pokemon
-    document.body.classList.remove('leaf-theme', 'fire-theme', 'water-theme');
-    if (pokemon?.type) {
-      document.body.classList.add(`${pokemon.type}-theme`);
-    }
+    // css theme change based on pokemon
+    document.body.className = pokemon?.type ? `${pokemon.type}-theme` : '';
+    return () => {
+      document.body.className = '';
+    };
   }, [pokemon]); 
 
   useEffect(() => {
@@ -34,22 +34,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       storage.set('username', username);
     }
   }, [username]);
-
-  useEffect(() => {
-    const storedSecrets = storage.get('secrets');
-    const storedPokemon = storage.get('pokemon');
-    const storedUsername = storage.get('username');
-
-    if (storedSecrets) {
-      setSecrets(storedSecrets);
-    }
-    if (storedPokemon) {
-      setPokemon(storedPokemon);
-    }
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-  }, []);
 
   return (
     <UserContext.Provider value={{ secrets, pokemon, username, setSecrets, setPokemon, setUsername }}>
