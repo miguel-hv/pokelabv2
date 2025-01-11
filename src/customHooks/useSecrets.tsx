@@ -1,12 +1,13 @@
+import { TypeList } from "../models/Pokemon.model";
 import { useUserContext } from "../user/context/UserContext";
 
 export const useSecrets = () => {
     const { secrets,setSecrets } = useUserContext();
 
-    const addSecret = (secret: string) => {
+    const addSecret = (secret: TypeList) => {
         setSecrets([...secrets, secret]);
     }
     return {
-        addSecret
+        secrets, addSecret
     }
 }
