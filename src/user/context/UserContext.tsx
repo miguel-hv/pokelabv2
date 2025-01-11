@@ -1,14 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import { Pokemon, TypeList } from "../../models/Pokemon.model";
-
-interface UserContextType {
-  secrets: TypeList[];
-  pokemon: Pokemon | null;
-  username: string;
-  setSecrets: (secrets: TypeList[]) => void;
-  setPokemon: (pokemon: Pokemon | null) => void;
-  setUsername: (username: string) => void;
-}
+import { UserContextType } from "./userContextType";
+import { storage } from "./storageService";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -19,17 +12,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [username, setUsername] = useState<string>('');
 
   useEffect(() => {
-    console.log("secrets changed");
-
     if (secrets.length > 0) {
-      console.log(secrets);
-      localStorage.setItem('secrets', JSON.stringify(secrets));
+      storage.set('secrets', secrets);
     } 
   }, [secrets]); 
 
   useEffect(() => {
     if (pokemon) {
-      localStorage.setItem('pokemon', JSON.stringify(pokemon));
+      storage.set('pokemon', pokemon);
     } 
     
   // css theme change based on pokemon
@@ -41,24 +31,20 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     if (username) {
-      localStorage.setItem('username', username);
+      storage.set('username', username);
     }
   }, [username]);
 
   useEffect(() => {
-    const storedSecrets = localStorage.getItem('secrets');
-    const storedPokemon = localStorage.getItem('pokemon');
-    const storedUsername = localStorage.getItem('username');
-
-    console.log(storedSecrets);
-    console.log(storedPokemon);
-    console.log(storedUsername);
+    const storedSecrets = storage.get('secrets');
+    const storedPokemon = storage.get('pokemon');
+    const storedUsername = storage.get('username');
 
     if (storedSecrets) {
-      setSecrets(JSON.parse(storedSecrets));
+      setSecrets(storedSecrets);
     }
     if (storedPokemon) {
-      setPokemon(JSON.parse(storedPokemon));
+      setPokemon(storedPokemon);
     }
     if (storedUsername) {
       setUsername(storedUsername);
