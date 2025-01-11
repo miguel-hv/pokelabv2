@@ -1,12 +1,11 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
-import { Pokemon } from "../../models/Pokemon.model";
-import { User } from "../../models/User.model";
+import { Pokemon, TypeList } from "../../models/Pokemon.model";
 
 interface UserContextType {
-  secrets: string[];
+  secrets: TypeList[];
   pokemon: Pokemon | null;
   username: string;
-  setSecrets: (secrets: string[]) => void;
+  setSecrets: (secrets: TypeList[]) => void;
   setPokemon: (pokemon: Pokemon | null) => void;
   setUsername: (username: string) => void;
 }
@@ -14,7 +13,7 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [secrets, setSecrets] = useState<string[]>(['']);
+  const [secrets, setSecrets] = useState<TypeList[]>([]);
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   // const [user, setUser] = useState<User | null>(null); // TODO: set user when using backend 
   const [username, setUsername] = useState<string>('');
