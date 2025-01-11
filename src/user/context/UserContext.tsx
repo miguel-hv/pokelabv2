@@ -19,7 +19,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [username, setUsername] = useState<string>('');
 
   useEffect(() => {
-    if (secrets) {
+    console.log("secrets changed");
+
+    if (secrets.length > 0) {
+      console.log(secrets);
       localStorage.setItem('secrets', JSON.stringify(secrets));
     } 
   }, [secrets]); 
@@ -37,15 +40,19 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [pokemon]); 
 
   useEffect(() => {
-    // if (username) {
+    if (username) {
       localStorage.setItem('username', username);
-    // }
+    }
   }, [username]);
 
   useEffect(() => {
     const storedSecrets = localStorage.getItem('secrets');
     const storedPokemon = localStorage.getItem('pokemon');
     const storedUsername = localStorage.getItem('username');
+
+    console.log(storedSecrets);
+    console.log(storedPokemon);
+    console.log(storedUsername);
 
     if (storedSecrets) {
       setSecrets(JSON.parse(storedSecrets));
