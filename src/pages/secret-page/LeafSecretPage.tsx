@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useUserContext } from "../../user/context/UserContext";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import SecretComponent from "./SecretComponent";
 import { Texts } from "../../resources/texts";
+import { useSecrets } from "../../customHooks/useSecrets";
 
 const LeafSecret: React.FC = () => {
   const typesList = PokemonType;
-  const { secrets, setSecrets } = useUserContext(); 
+  const { secrets, addSecret } = useSecrets(); 
 
   let textSecret = '';
    const { TypeDescription, NewSecret, ImagePath } = Texts.LeafSecret;
@@ -14,7 +14,7 @@ const LeafSecret: React.FC = () => {
   
   useEffect(() => {
     if (!secrets.includes(typesList.leaf)) {
-      setSecrets([...secrets, typesList.leaf]);
+      addSecret(typesList.leaf);
       textSecret = NewSecret;
     }
   }, []);

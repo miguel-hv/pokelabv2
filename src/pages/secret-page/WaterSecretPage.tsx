@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { useUserContext } from "../../user/context/UserContext";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import SecretComponent from "./SecretComponent";
 import { Texts } from "../../resources/texts";
+import { useSecrets } from "../../customHooks/useSecrets";
 
 const WaterSecret: React.FC = () => {
   const typesList = PokemonType;
-  const { secrets, setSecrets } = useUserContext(); 
+  const { secrets, addSecret } = useSecrets(); 
 
   let textSecret = '';
  const { TypeDescription, NewSecret, ImagePath } = Texts.WaterSecret;
 
   useEffect(() => {
     if (!secrets.includes(typesList.water)) {
-      setSecrets([...secrets, typesList.water]);
+      addSecret(typesList.water);
       textSecret = NewSecret;
     }
   }, []);

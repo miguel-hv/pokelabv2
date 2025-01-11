@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (secrets.length === 3) {
-      navigate(UrlRoutes.end);
+      navigate(`/${UrlRoutes.end}`);
     }
   }, [secrets, navigate]);
 
