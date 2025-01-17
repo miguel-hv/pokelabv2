@@ -5,6 +5,7 @@ import RegisterPage from '../pages/register-page/RegisterPage';
 import UserProtectedRoute from './UserProtectedRoute';
 import SecretProtectedRoute from './SecretProtectedRoute';
 import EndPage from '../pages/end-page/EndPage';
+import EndingProtectedRoute from './EndingProtectedRoute';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
 const PokePage = lazy(() => import('../pages/poke-page/PokePage'));
@@ -58,8 +59,10 @@ const AppRoutes: React.FC = () => {
               <Route path={UrlRoutes.home} element={<HomePage />} />
               <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
             </Route>
-
-            <Route path={UrlRoutes.end} element={<EndPage />} />
+              
+            <Route element={<EndingProtectedRoute />}>
+              <Route path={UrlRoutes.end} element={<EndPage />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
