@@ -1,14 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UrlRoutes } from '../../enumerators/urlRoutes.enum';
 import './WelcomePage.scss'; // Import the SCSS file for styling
 import { Button } from '@mui/material';
+import { useNavigationUtils } from '../../customHooks/useNavigationUtils';
 
 const WelcomePage: React.FC = () => {
-  const navigate = useNavigate();
+  const { navigateTo} = useNavigationUtils();
 
   const handleActionButton = () => {
-    navigate(UrlRoutes.home); 
+    navigateTo(UrlRoutes.home); 
   };
 
   React.useEffect(() => {

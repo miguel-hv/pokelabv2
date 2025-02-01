@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import RegisterForm from "./RegisterForm";
 import { useAuth } from "../../customHooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import { UrlRoutes } from "../../enumerators/urlRoutes.enum";
+import { useNavigationUtils } from "../../customHooks/useNavigationUtils";
 
 const RegisterPage: React.FC = () => {
     const { login } = useAuth();
     const { username } = useAuth();
-    const navigate = useNavigate();
+    const { navigateTo } = useNavigationUtils();
 
     useEffect(() => {
         if (username) {
-          navigate(UrlRoutes.home, { replace: true });
+            navigateTo(UrlRoutes.home, true);
         }
       }, [username]);
 

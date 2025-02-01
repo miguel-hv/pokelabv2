@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UrlRoutesRoot, UrlRoutes } from "../../enumerators/urlRoutes.enum";
 import { PokemonType } from "../../enumerators/pokemonType.enum";
 import MenuComponent from "./MenuCoponent";
 import { useSecrets } from "../../customHooks/useSecrets";
 import { usePokemon } from "../../customHooks/usePokemon";
+import { useNavigationUtils } from "../../customHooks/useNavigationUtils";
 
 const HomePage: React.FC = () => {
-  const navigate = useNavigate();
+  const { navigateTo } = useNavigationUtils();
   const { secrets } = useSecrets();
   const { pokemon } = usePokemon();
   const pokemonType = PokemonType;
@@ -20,9 +21,9 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (secrets.length === 3) {
-      navigate(`/${UrlRoutes.end}`);
+      navigateTo(`/${UrlRoutes.end}`);
     }
-  }, [secrets, navigate]);
+  }, [secrets, navigateTo]);
 
   return (
     <div className="menu">

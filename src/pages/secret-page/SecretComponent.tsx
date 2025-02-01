@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import DialogOak from "../../components/shared/DialogOak";
+import { useDialog } from "../../customHooks/useDialog";
+import { useNavigationUtils } from "../../customHooks/useNavigationUtils";
 
 interface SecretComponentProps {
     textSecretType: string;
@@ -9,8 +10,8 @@ interface SecretComponentProps {
 }
 
 const SecretComponent: React.FC<SecretComponentProps> = ({textSecretType, textSecret, imagePath}) => {
-    const [isDialogOpen, setDialogOpen] = useState(false);
-    const navigate = useNavigate();
+    const { isDialogOpen, openDialog, closeDialog } = useDialog();
+    const { navigateBack } = useNavigationUtils();
 
     const dialogTexts = {
         alreadyVisited: "Ya tienes este secreto",
@@ -23,26 +24,18 @@ const SecretComponent: React.FC<SecretComponentProps> = ({textSecretType, textSe
     };
 
     useEffect(() => {
-        openDialogOak();
-    }, []);
-
-    const openDialogOak = () => {
-        setDialogOpen(true);
-    };
+        openDialog();
+    }, [openDialog]);
 
     const handleDialogClose = () => {
-        setDialogOpen(false);
+        closeDialog();
         navigateBack();
     };
 
     const handleDialogAccept = () => {
-        setDialogOpen(false);
+        closeDialog();
         navigateBack();
     };
-
-    const navigateBack = () => {
-        navigate(-1);
-    }
 
     return (
         <div className="secret__image-container screen-container__inner">

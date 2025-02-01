@@ -2,17 +2,18 @@ import { useState } from "react";
 import { PokemonList } from "../../enumerators/pokemon.enum";
 import { Pokemon } from "../../models/Pokemon.model";
 import { DialogContent } from "../../models/DialogText.model";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { usePokemon } from "../../customHooks/usePokemon";
 import DialogOak from "../../components/shared/DialogOak";
+import { useNavigationUtils } from "../../customHooks/useNavigationUtils";
+import { useDialog } from "../../customHooks/useDialog";
 
 const SelectPokePage: React.FC = () => {
     const { pokemon, setPokemon } = usePokemon();
-    const navigate = useNavigate();
+    const { navigateBack } = useNavigationUtils();
     const pokemonList = PokemonList;
     const [newPokemon, setNewPokemon] = useState<Pokemon | null>(null);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const { isDialogOpen, openDialog, closeDialog } = useDialog();
     const [dialogSettings, setDialogSettings] = useState<DialogContent>({
         description: '',
         ok: '¡Elegir!',
@@ -39,12 +40,12 @@ const SelectPokePage: React.FC = () => {
             });
         }
         setNewPokemon(clickedPokemon);
-        setIsDialogOpen(true);
+        openDialog();
         console.log(dialogSettings);
     }
 
     const handleDialogAccept = () => {
-        setIsDialogOpen(false);
+        closeDialog();
         if (newPokemon) {
             setPokemon(newPokemon);
             handleGoBack();
@@ -52,11 +53,11 @@ const SelectPokePage: React.FC = () => {
     };
 
     const handleDialogClose = () => {
-        setIsDialogOpen(false);
+        closeDialog();
     };
 
-      const handleGoBack = () => {
-        navigate(-1);
+    const handleGoBack = () => {
+        navigateBack();
     }
 
     return (
