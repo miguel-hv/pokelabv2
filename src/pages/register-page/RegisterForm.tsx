@@ -16,8 +16,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formState.username.trim()) {
-        onSubmit(formState.username);
-        setFormState({ username: '' });
+      onSubmit(formState.username);
+      setFormState({ username: '' });
     }
   };
 

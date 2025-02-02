@@ -12,6 +12,7 @@ const WelcomePage: React.FC = () => {
   };
 
   React.useEffect(() => {
+    console.log("enters welcome");
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
         handleActionButton();

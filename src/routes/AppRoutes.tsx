@@ -2,10 +2,11 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { UrlRoutes } from '../enumerators/urlRoutes.enum';
 import RegisterPage from '../pages/register-page/RegisterPage';
-import UserProtectedRoute from './UserProtectedRoute';
-import SecretProtectedRoute from './SecretProtectedRoute';
+import UserProtectedRoute from './guards/UserProtectedRoute';
+import SecretProtectedRoute from './guards/SecretProtectedRoute';
 import EndPage from '../pages/end-page/EndPage';
-import EndingProtectedRoute from './EndingProtectedRoute';
+import EndingProtectedRoute from './guards/EndingProtectedRoute';
+import AuthRedirectRoute from './guards/AuthRedirectRoute';
 
 const WelcomePage = lazy(() => import('../pages/welcome-page/WelcomePage'));
 const PokePage = lazy(() => import('../pages/poke-page/PokePage'));
@@ -22,7 +23,9 @@ const AppRoutes: React.FC = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Navigate to={"poke"} replace/>} />
-          <Route path={UrlRoutes.access} element={<RegisterPage />} />
+          <Route element={<AuthRedirectRoute />}>
+            <Route path={UrlRoutes.access} element={<RegisterPage />} />
+          </Route>
           
           <Route element={<UserProtectedRoute />}>
             <Route path={UrlRoutes.welcome} element={<WelcomePage />} />

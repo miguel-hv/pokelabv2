@@ -8,6 +8,7 @@ export const useNavigationUtils = () => {
   };
 
   const navigateTo = (path: string, replace?: boolean) => {
+    console.log(path);
     navigate(path, { replace });
   };
 

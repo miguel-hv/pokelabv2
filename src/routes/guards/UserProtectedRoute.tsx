@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { UrlRoutes } from "../enumerators/urlRoutes.enum";
-import { useAuth } from "../customHooks/useAuth";
+import { UrlRoutes } from "../../enumerators/urlRoutes.enum";
+import { useAuth } from "../../customHooks/useAuth";
 
 
 const UserProtectedRoute: React.FC = () => {
