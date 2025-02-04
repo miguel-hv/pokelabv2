@@ -15,6 +15,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation(); // Prevent enter event from reaching WelcomePage
     if (formState.username.trim()) {
       onSubmit(formState.username);
       setFormState({ username: '' });

@@ -19,9 +19,14 @@ const WelcomePage: React.FC = () => {
       }
     };
 
-    document.addEventListener('keyup', handleKeyPress);
+    //TODO: think about a more elegant solution; autofocus or button event listener not working in case button loses first focus
+    const timer = setTimeout(() => {
+      document.addEventListener('keydown', handleKeyPress);
+    }, 1000); 
+
     return () => {
-      document.removeEventListener('keyup', handleKeyPress);
+      clearTimeout(timer); 
+      document.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
 
