@@ -48,7 +48,7 @@ const Header: React.FC = () => {
 
           <div className="header__state-container">
             <div className="header__logout">
-              <Button variant="outlined" color="primary" onClick={handleLogout}>
+              <Button variant="outlined" name="logout" color="primary" onClick={handleLogout}>
                 Logout
               </Button>
             </div>
