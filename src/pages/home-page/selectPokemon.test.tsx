@@ -8,6 +8,40 @@ import PokePage from '../poke-page/PokePage';
 import { UrlRoutes } from '../../enumerators/urlRoutes.enum';
 import '@testing-library/jest-dom';
 
+const testSelectedPokemon = async (pokemonName: string) => {
+            
+    render(
+        <MemoryRouter initialEntries={['/poke/home']}>
+            <UserProvider>
+                <Routes> 
+                    <Route path={UrlRoutes.poke} element={<PokePage />} >
+                        <Route path={UrlRoutes.home} element={<HomePage />} />
+                        <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
+                    </Route>
+                </Routes>
+            </UserProvider>
+        </MemoryRouter>
+    );
+
+    const laboratorioButton = await screen.findByText('Laboratorio');
+    fireEvent.click(laboratorioButton);
+
+    const bulbasaurButton = await screen.findByText(pokemonName);
+    fireEvent.click(bulbasaurButton);
+
+    const elegirButton = await screen.findByText('¡Elegir!');
+    fireEvent.click(elegirButton);
+    
+    await waitFor(() => {
+        expect(screen.getByText(new RegExp(pokemonName, 'i'))).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+        const userContext = JSON.parse(localStorage.getItem('pokemon') || '{}');
+        console.log(userContext);
+        expect(userContext.name).toBe(pokemonName);
+    });
+}
 
 describe('Select Pokemon', () => {
 
@@ -17,38 +51,9 @@ describe('Select Pokemon', () => {
     });
     
 
-    it('should select a pokemon and update user context', async () => {
-        render(
-            <MemoryRouter initialEntries={['/poke/home']}>
-                <UserProvider>
-                    <Routes> 
-                        <Route path={UrlRoutes.poke} element={<PokePage />} >
-                            <Route path={UrlRoutes.home} element={<HomePage />} />
-                            <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
-                        </Route>
-                    </Routes>
-                </UserProvider>
-            </MemoryRouter>
-        );
-    
-        const laboratorioButton = await screen.findByText('Laboratorio');
-        fireEvent.click(laboratorioButton);
-    
-        const bulbasaurButton = await screen.findByText('bulbasaur');
-        fireEvent.click(bulbasaurButton);
-    
-        const elegirButton = await screen.findByText('¡Elegir!');
-        fireEvent.click(elegirButton);
-        
-        await waitFor(() => {
-            expect(screen.getByText('Bulbasaur')).toBeInTheDocument();
-        });
-    
-        await waitFor(() => {
-            const userContext = JSON.parse(localStorage.getItem('pokemon') || '{}');
-            console.log(userContext);
-            expect(userContext.name).toBe('bulbasaur');
-        });
+    it.each([['charmander'], ['squirtle'], ['bulbasaur']])('should select a pokemon and update user context', async (pokemonName) => {
+        await testSelectedPokemon(pokemonName);
     });
+    
     
 });
