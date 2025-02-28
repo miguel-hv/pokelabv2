@@ -37,12 +37,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
         />
         <Button
             type="submit"
-            name="submit"
             variant="contained"
             color="primary"
             fullWidth
         >
-            Send
+            Enviar
         </Button>
     </form>
   );

@@ -42,7 +42,7 @@ describe('Login Test', () => {
       //make sure it redirects from welcome to access
     expect(await screen.getByLabelText(/alias/i)).toBeInTheDocument();
     const input = screen.getByLabelText(/alias/i);
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /enviar/i })).toBeInTheDocument();
     await user.type(input, `${username}`);
 
     await user.keyboard('{Enter}');
