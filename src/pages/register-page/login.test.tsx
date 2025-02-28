@@ -9,6 +9,7 @@ import { UrlRoutes } from '../../enumerators/urlRoutes.enum';
 import PokePage from '../poke-page/PokePage';
 import HomePage from '../home-page/HomePage';
 import UserProtectedRoute from '../../routes/guards/UserProtectedRoute';
+import '@testing-library/jest-dom';
 
 
 describe('Login Test', () => {
@@ -41,7 +42,7 @@ describe('Login Test', () => {
       //make sure it redirects from welcome to access
     expect(await screen.getByLabelText(/alias/i)).toBeInTheDocument();
     const input = screen.getByLabelText(/alias/i);
-    expect(screen.getByRole('button', { type: /submit/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
     await user.type(input, `${username}`);
 
     await user.keyboard('{Enter}');
