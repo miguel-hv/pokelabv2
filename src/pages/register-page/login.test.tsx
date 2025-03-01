@@ -58,8 +58,7 @@ describe('Login Test', () => {
       
     expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument();
 
-    // Verify local storage contains the correct user state
-    // const userState = JSON.parse(localStorage.getItem('userState') || '{}');
-    // expect(userState.currentUser.username).toBe(username);
+    const userState = JSON.parse(localStorage.getItem('username') || '{}');
+    expect(userState).toBe(username);
   });
 });
