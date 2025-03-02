@@ -1,13 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
 import { TypeList } from "../models/Pokemon.model";
-import { useUserContext } from "../user/context/UserContext";
+import { addSecret } from "../user/slice/userSlice";
+import { RootState } from "../store";
 
 export const useSecrets = () => {
-    const { secrets,setSecrets } = useUserContext();
+    const secrets = useSelector((state: RootState) => state.user.secrets);
 
-    const addSecret = (secret: TypeList) => {
-        setSecrets([...secrets, secret]);
+    const addSecretDispatch = (secret: TypeList) => {
+        useDispatch()(addSecret(secret));
     }
     return {
-        secrets, addSecret
+        secrets, addSecret: addSecretDispatch
     }
 }

@@ -37,7 +37,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState: initialStateLoaded,
     reducers: {
-      setUser: (state, action: PayloadAction<string>) => {
+      setUsername: (state, action: PayloadAction<string>) => {
         state.username = action.payload;
         saveStateToLocalStorage(state);
       },
@@ -57,9 +57,10 @@ const userSlice = createSlice({
         state.username = '';
         state.pokemon = null;
         state.secrets = [];
+        saveStateToLocalStorage(state);
       },
     },
   });
 
-export const { setUser, setPokemon, addSecret, setSecrets, clearUser } = userSlice.actions;
+export const { setUsername, setPokemon, addSecret, setSecrets, clearUser } = userSlice.actions;
 export default userSlice.reducer;
