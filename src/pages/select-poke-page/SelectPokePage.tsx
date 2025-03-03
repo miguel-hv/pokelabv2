@@ -67,7 +67,7 @@ const SelectPokePage: React.FC = () => {
                     Volver
                 </Button>
             </div>
-            <div className="menu" >
+            <div className="menu menu--with-button" >
                 { pokemonList.map((pokemon) => (
                     <div className="menu__link card" onClick={() => handleDialogOpen(pokemon)} key={pokemon.name}>
                         <div className="menu__item">
