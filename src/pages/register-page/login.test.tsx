@@ -48,7 +48,6 @@ describe('Login Test', () => {
     await user.keyboard('{Enter}');
     expect(await screen.findByText(/¡Te doy la bienvenida a Pueblo Paleta!/i)).toBeInTheDocument();
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(window.location.pathname);
     // await user.keyboard('{Enter}');
     const button = screen.getByRole("button");
     screen.debug();

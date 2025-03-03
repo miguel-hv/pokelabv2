@@ -50,14 +50,16 @@ const userSlice = createSlice({
         saveStateToLocalStorage(state);
       },
       addSecret: (state, action: PayloadAction<TypeList>) => {
-        state.secrets.push(action.payload);
-        saveStateToLocalStorage(state);
+        if (!state.secrets.find((secret) => secret === action.payload)){
+          state.secrets.push(action.payload);
+          saveStateToLocalStorage(state);
+        }
       },
       clearUser: (state) => {
         state.username = '';
         state.pokemon = null;
         state.secrets = [];
-        saveStateToLocalStorage(state);
+        localStorage.removeItem('userState');
       },
     },
   });

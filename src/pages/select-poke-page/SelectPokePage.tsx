@@ -41,7 +41,7 @@ const SelectPokePage: React.FC = () => {
         }
         setNewPokemon(clickedPokemon);
         openDialog();
-        console.log(dialogSettings);
+        (dialogSettings);
     }
 
     const handleDialogAccept = () => {

@@ -38,7 +38,6 @@ const testSelectedPokemon = async (pokemonName: string) => {
 
     await waitFor(() => {
         const userContext = JSON.parse(localStorage.getItem('pokemon') || '{}');
-        console.log(userContext);
         expect(userContext.name).toBe(pokemonName);
     });
 }
