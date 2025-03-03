@@ -4,12 +4,15 @@ import SecretProtectedRoute from '../../routes/guards/SecretProtectedRoute';
 import FireSecret from './FireSecretPage';
 import WaterSecret from './WaterSecretPage';
 import LeafSecret from './LeafSecretPage';
-import { UserProvider } from '../../user/context/UserContext';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import PokePage from '../poke-page/PokePage';
 import HomePage from '../home-page/HomePage';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { Pokemon, PokemonList, TypeList } from '../../models/Pokemon.model';
+import { Provider } from 'react-redux';
+import store from '../../store';
+import { UserState } from '../../models/UserState.model';
+import { setPokemon, setUsername } from '../../user/slice/userSlice';
 
 interface testPokemon {
     pokemon: PokemonList;
@@ -43,7 +46,7 @@ const squirtle = {
 const testGetSecrets = async (testPokemon: testPokemon) => {
     render(
         <MemoryRouter initialEntries={['/poke/home']}>
-            <UserProvider>
+            <Provider store={store}>
                 <Routes> 
                     <Route path={UrlRoutes.secrets}>
                         <Route
@@ -75,16 +78,24 @@ const testGetSecrets = async (testPokemon: testPokemon) => {
                         <Route path={UrlRoutes.home} element={<HomePage />} />
                     </Route>
                 </Routes>
-            </UserProvider>
+            </Provider>
         </MemoryRouter>
     );
+
 
     const pokemonSelected: Pokemon = {
         name: testPokemon.pokemon,
         type: testPokemon.secretName
     }
+    const userState: UserState = {
+        username: 'testuser',
+        pokemon: pokemonSelected,
+        secrets: [],
+    }
 
-    localStorage.setItem('pokemon', JSON.stringify(pokemonSelected));
+    localStorage.setItem('userState', JSON.stringify(userState));
+    store.dispatch(setUsername(userState.username));
+    store.dispatch(setPokemon(userState.pokemon));
 
     fireEvent.click(screen.getByText(testPokemon.location));
 
@@ -96,8 +107,8 @@ const testGetSecrets = async (testPokemon: testPokemon) => {
     screen.debug();
 
     await waitFor(() => {
-        const secretsState = JSON.parse(localStorage.getItem('secrets') || '[]');
-        expect(secretsState).toContain(testPokemon.secretName);
+        const userState = JSON.parse(localStorage.getItem('userState') || '[]');
+        expect(userState.secrets).toContain(testPokemon.secretName);
     });
 }
 

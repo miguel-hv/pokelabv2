@@ -2,43 +2,50 @@ import { render, fireEvent, waitFor,  screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
-import { UserProvider } from '../../user/context/UserContext';
 import SelectPokePage from '../select-poke-page/SelectPokePage';
 import PokePage from '../poke-page/PokePage';
 import { UrlRoutes } from '../../enumerators/urlRoutes.enum';
 import '@testing-library/jest-dom';
+import store from '../../store';
+import { Provider } from 'react-redux';
+import { UserState } from '../../models/UserState.model';
+import { clearUser, setUsername } from '../../user/slice/userSlice';
 
 const testSelectedPokemon = async (pokemonName: string) => {
             
     render(
         <MemoryRouter initialEntries={['/poke/home']}>
-            <UserProvider>
+            <Provider store={store}>
                 <Routes> 
                     <Route path={UrlRoutes.poke} element={<PokePage />} >
                         <Route path={UrlRoutes.home} element={<HomePage />} />
                         <Route path={UrlRoutes.selectPokemon} element={<SelectPokePage />} />
                     </Route>
                 </Routes>
-            </UserProvider>
+            </Provider>
         </MemoryRouter>
     );
 
     const laboratorioButton = await screen.findByText('Laboratorio');
     fireEvent.click(laboratorioButton);
+    
+    const pokemonButton = await screen.findByText(pokemonName);
+    // const pokemonButton = await waitFor(() => screen.getByText(pokemonName));
+    fireEvent.click(pokemonButton);
+    screen.debug();
 
-    const bulbasaurButton = await screen.findByText(pokemonName);
-    fireEvent.click(bulbasaurButton);
+    const chooseButton = await screen.findByText('¡Elegir!');
+    fireEvent.click(chooseButton);
 
-    const elegirButton = await screen.findByText('¡Elegir!');
-    fireEvent.click(elegirButton);
+    screen.debug();
     
     await waitFor(() => {
         expect(screen.getByText(new RegExp(pokemonName, 'i'))).toBeInTheDocument();
     });
 
     await waitFor(() => {
-        const userContext = JSON.parse(localStorage.getItem('pokemon') || '{}');
-        expect(userContext.name).toBe(pokemonName);
+        const userContext = JSON.parse(localStorage.getItem('userState') || '{}');
+        expect(userContext.pokemon.name).toBe(pokemonName);
     });
 }
 
@@ -46,7 +53,14 @@ describe('Select Pokemon', () => {
 
     beforeEach(() => {
         localStorage.clear();
-        localStorage.setItem('username', JSON.stringify('testuser'));
+        clearUser();
+        const userState: UserState = {
+            username: 'testuser',
+            pokemon: null,
+            secrets: [],
+        }
+        localStorage.setItem('userState', JSON.stringify(userState));
+        store.dispatch(setUsername(userState.username));
     });
     
 

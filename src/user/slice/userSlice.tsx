@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Pokemon, TypeList } from '../../models/Pokemon.model';
-
-interface UserState {
-    username: string;
-    pokemon: Pokemon | null;
-    secrets: TypeList[];
-}
+import { UserState } from '../../models/UserState.model';
 
 const initialState: UserState = {
     username: '',
